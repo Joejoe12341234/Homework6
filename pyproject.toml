@@ -1,0 +1,88 @@
+[build-system]
+requires = ["scikit-build-core", "pybind11"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "se-for-sci-hw6"
+version = "0.0.1"
+description = "An example of a compiled package."
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    { name = "My Name", email = "me@email.com" },
+]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering",
+    "Typing :: Typed",
+]
+dependencies = [
+    "numpy",
+]
+
+[project.optional-dependencies]
+dev = [
+    "matplotlib",
+]
+test = [
+    "pytest>=6",
+]
+
+[project.urls]
+"Bug Tracker" = "https://github.com/APC524-F2023/se-for-sci-hw6/issues"
+Changelog = "https://github.com/APC524-F2023/se-for-sci-hw6/releases"
+Discussions = "https://github.com/APC524-F2023/se-for-sci-hw6/discussions"
+Documentation = "https://se_for_sci_hw6.readthedocs.io/"
+Homepage = "https://github.com/APC524-F2023/se-for-sci-hw6"
+
+
+[tool.cibuildwheel]
+test-extras = ["test"]
+test-command = "pytest {project}/tests"
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
+xfail_strict = true
+filterwarnings = ["error"]
+log_cli_level = "INFO"
+testpaths = [
+  "tests",
+]
+
+
+[tool.mypy]
+files = "src"
+python_version = "3.8"
+warn_unused_configs = true
+strict = true
+show_error_codes = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+warn_unreachable = true
+
+
+[tool.pylint]
+py-version = "3.7"
+ignore-paths= ["src/se_for_sci_hw6/_version.py"]
+extension-pkg-allow-list = ["se_for_sci_hw6._core"]
+reports.output-format = "colorized"
+similarities.ignore-imports = "yes"
+messages_control.disable = [
+  "design",
+  "fixme",
+  "line-too-long",
+  "wrong-import-position",
+  "missing-module-docstring",
+]
